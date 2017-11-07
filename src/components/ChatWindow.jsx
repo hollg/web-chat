@@ -16,8 +16,8 @@ export default class ChatWindow extends Component {
       <div className='chat-window'>
         <h1>Good and nice webchat</h1>
         <div className='output'>
-          {this.state.updates.map((update, i) => 
-            <Update key={i} name={update.name} message={update.message} hex={update.hex}/>)}
+          {this.state.updates.map((update, i) =>
+            <Update key={i} name={update.name} message={update.message} hex={update.hex} />)}
         </div>
       </div>
     )

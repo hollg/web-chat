@@ -25,7 +25,7 @@ export default class Controls extends Component {
     )
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.props.socket.on('hex', data => {
       this.setState({hex: data.hex})
     })
@@ -34,7 +34,7 @@ export default class Controls extends Component {
     this.props.socket.emit('chat', {
       message: this.state.message,
       name: this.state.name,
-      hex:  this.state.hex
+      hex: this.state.hex
     })
     this.setState({
       message: ''
