@@ -9,7 +9,7 @@ export default class App extends Component {
   constructor (props) {
     super(props)
     this.state = {}
-    this.socket = openSocket('http://localhost:4040')
+this.socket = openSocket('https://floating-shelf-53073.herokuapp.com')
   }
 
   render () {
