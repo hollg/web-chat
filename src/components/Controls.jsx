@@ -6,7 +6,8 @@ export default class Controls extends Component {
 
     this.state = {
       name: '',
-      message: ''
+      message: '',
+      hex: ''
     }
 
     this.emitMessage = this.emitMessage.bind(this)
@@ -24,10 +25,16 @@ export default class Controls extends Component {
     )
   }
 
+  componentDidMount() {
+    this.props.socket.on('hex', data => {
+      this.setState({hex: data.hex})
+    })
+  }
   emitMessage () {
     this.props.socket.emit('chat', {
       message: this.state.message,
-      name: this.state.name
+      name: this.state.name,
+      hex:  this.state.hex
     })
     this.setState({
       message: ''

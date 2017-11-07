@@ -16,7 +16,8 @@ export default class ChatWindow extends Component {
       <div className='chat-window'>
         <h1>Good and nice webchat</h1>
         <div className='output'>
-          {this.state.updates.map((update, i) => <Update key={i} name={update.name} message={update.message} />)}
+          {this.state.updates.map((update, i) => 
+            <Update key={i} name={update.name} message={update.message} hex={update.hex}/>)}
         </div>
       </div>
     )
@@ -26,7 +27,8 @@ export default class ChatWindow extends Component {
     this.props.socket.on('chat', data => {
       var joined = this.state.updates.concat({
         name: data.name,
-        message: data.message})
+        message: data.message,
+        hex: data.hex})
       this.setState({updates: joined})
     })
   }
