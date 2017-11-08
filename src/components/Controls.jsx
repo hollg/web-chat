@@ -5,20 +5,19 @@ export default class Controls extends Component {
     super(props)
 
     this.state = {
-      name: '',
+      nickname: '',
       message: '',
       hex: ''
     }
 
     this.emitMessage = this.emitMessage.bind(this)
-    this.updateName = this.updateName.bind(this)
+    this.updateNickname = this.updateNickname.bind(this)
     this.updateMessage = this.updateMessage.bind(this)
   }
 
   render () {
     return (
       <div className='controls'>
-        <input className='name' type='text' placeholder='name' onChange={this.updateName} />
         <input className='message' type='text' placeholder='message' value={this.state.message} onChange={this.updateMessage} />
         <button className='send' onClick={this.emitMessage}>Send</button>
       </div>
@@ -30,10 +29,11 @@ export default class Controls extends Component {
       this.setState({hex: data.hex})
     })
   }
+
   emitMessage () {
     this.props.socket.emit('chat', {
       message: this.state.message,
-      name: this.state.name,
+      nickname: this.props.nickname,
       hex: this.state.hex
     })
     this.setState({
@@ -41,9 +41,9 @@ export default class Controls extends Component {
     })
   }
 
-  updateName (event) {
+  updateNickname (event) {
     this.setState({
-      name: event.target.value
+      nickname: event.target.value
     })
   }
 

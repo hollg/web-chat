@@ -1,23 +1,31 @@
 import React, {Component} from 'react'
 import openSocket from 'socket.io-client'
 
-import Controls from './Controls.jsx'
-import ChatWindow from './ChatWindow.jsx'
+import ChatPage from './ChatPage.jsx'
+import SignUp from './SignUp.jsx'
 
-// const socket = openSocket('http://localhost:4040')
+
 export default class App extends Component {
   constructor (props) {
     super(props)
-    this.state = {}
-    this.socket = openSocket('https://garys-chat-api.herokuapp.com/')
+    this.state = {
+      nickname: ''
+    }
+    // this.socket = openSocket('https://garys-chat-api.herokuapp.com/')
+    this.socket = openSocket('http://localhost:4040')
   }
 
   render () {
     return (
-      <div className='panda-chat'>
-        <ChatWindow socket={this.socket} />
-        <Controls socket={this.socket} />
-      </div>
+      this.state.nickname
+        ? <ChatPage socket={this.socket} nickname={this.state.nickname}/>
+        : <SignUp socket={this.socket} />
     )
+  }
+
+  componentDidMount () {
+    this.socket.on('nickname', data => {
+      this.setState({nickname: data.nickname})
+    })
   }
 }
