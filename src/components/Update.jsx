@@ -5,7 +5,7 @@ export default class Update extends Component {
     var style = {color: this.props.hex}
     return (
       <p>
-        <strong style={style}>{this.props.name}:</strong> {this.props.message}
+        <strong style={style}>{this.props.nickname}:</strong> {this.props.message}
       </p>
     )
   }

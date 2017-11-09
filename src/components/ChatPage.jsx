@@ -8,7 +8,7 @@ export default class ChatPage extends Component {
     return (
       <div className='panda-chat'>
         <ChatWindow socket={this.props.socket} />
-        <Controls socket={this.props.socket} nickname={this.props.nickname}/>
+        <Controls socket={this.props.socket} nickname={this.props.nickname} hex={this.props.hex}/>
       </div>
     )
   }

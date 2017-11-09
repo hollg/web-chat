@@ -5,13 +5,10 @@ export default class Controls extends Component {
     super(props)
 
     this.state = {
-      nickname: '',
-      message: '',
-      hex: ''
+      message: ''
     }
 
     this.emitMessage = this.emitMessage.bind(this)
-    this.updateNickname = this.updateNickname.bind(this)
     this.updateMessage = this.updateMessage.bind(this)
   }
 
@@ -24,26 +21,14 @@ export default class Controls extends Component {
     )
   }
 
-  componentDidMount () {
-    this.props.socket.on('hex', data => {
-      this.setState({hex: data.hex})
-    })
-  }
-
   emitMessage () {
     this.props.socket.emit('chat', {
       message: this.state.message,
       nickname: this.props.nickname,
-      hex: this.state.hex
+      hex: this.props.hex
     })
     this.setState({
       message: ''
-    })
-  }
-
-  updateNickname (event) {
-    this.setState({
-      nickname: event.target.value
     })
   }
 
