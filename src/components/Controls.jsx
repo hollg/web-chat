@@ -5,7 +5,8 @@ export default class Controls extends Component {
     super(props)
 
     this.state = {
-      message: ''
+      message: '',
+      isTyping: [false, false]
     }
 
     this.emitMessage = this.emitMessage.bind(this)
@@ -15,10 +16,46 @@ export default class Controls extends Component {
   render () {
     return (
       <div className='controls'>
-        <input className='message' type='text' placeholder='message' value={this.state.message} onChange={this.updateMessage} />
+        <input className='message' type='text' placeholder='message' value={this.state.message} onChange={this.updateMessage} onKeyDown={this.onKeyDown.bind(this)} />
         <button className='send' onClick={this.emitMessage}>Send</button>
       </div>
     )
+  }
+
+  componentDidUpdate() {
+    if (this.state.isTyping[0] && !this.state.isTyping[1]) {
+      console.log('this happened')
+      this.props.socket.emit('startTyping', {
+        message: ' is typing...',
+        nickname: this.props.nickname,
+        hex: this.props.hex
+      })
+      this.state.isTyping[1] = true
+    } else if (!this.state.isTyping[0]) {
+      this.props.socket.emit('stopTyping', {
+        nickname: this.props.nickname
+      })
+    }
+  }
+
+  onKeyDown(event) {
+    switch (event.keyCode) {
+      case 13:
+        this.emitMessage()
+        break
+    }
+
+    if (!this.state.isTyping[0]) {
+      this.setState({
+        isTyping: [true, false]
+      })
+    }
+
+    if (this.state.message.length == 0) {
+      this.setState({
+        isTyping: [false, false]
+      })
+    }
   }
 
   emitMessage () {
@@ -28,7 +65,8 @@ export default class Controls extends Component {
       hex: this.props.hex
     })
     this.setState({
-      message: ''
+      message: '',
+      isTyping: [false, false]
     })
   }
 
