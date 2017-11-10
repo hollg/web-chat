@@ -13,7 +13,9 @@ export default class ChatWindow extends Component {
 
   render () {
     return (
-      <div className='chat-window'>
+      <div className='chat-window'  ref={(div) => 
+          this.messageList = div
+        }>
         <h1>Good and nice webchat</h1>
         <div className='output'>
           {this.state.updates.map((update, i) =>
@@ -32,4 +34,16 @@ export default class ChatWindow extends Component {
       this.setState({updates: joined})
     })
   }
-    }
+
+  componentDidUpdate () {
+    this.scrollToBottom()
+  }
+
+  
+  scrollToBottom() {
+    const scrollHeight = this.messageList.scrollHeight
+    const height = this.messageList.clientHeight
+    const maxScrollTop = scrollHeight - height
+    this.messageList.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0
+  }
+}
