@@ -11,12 +11,13 @@ export default class Controls extends Component {
 
     this.emitMessage = this.emitMessage.bind(this)
     this.updateMessage = this.updateMessage.bind(this)
+    this.onKeyPress = this.onKeyPress.bind(this)
   }
 
   render () {
     return (
       <div className='controls'>
-        <input className='message' type='text' placeholder='message' value={this.state.message} onChange={this.updateMessage} onKeyUp={this.onKeyPress.bind(this)} />
+        <input className='message' type='text' placeholder='message' value={this.state.message} onChange={this.updateMessage} onKeyUp={this.onKeyPress} />
         <button className='send' onClick={this.emitMessage}>Send</button>
       </div>
     )

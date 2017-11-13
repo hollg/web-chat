@@ -20,9 +20,9 @@ export default class ChatWindow extends Component {
         }>
         <div className='output'>
           {this.state.updates.map((update, i) =>
-            <Update key={i} nickname={update.nickname} message={update.message} hex={update.hex} />)}
+            <Update key={i} nickname={update.nickname} message={update.message} hex={update.hex} type={update.type}/>)}
           {this.state.usersTyping.map((user, i) =>
-            <Update key={i} nickname={user.nickname} message={user.message} hex={user.hex} />)}
+            <Update key={i} nickname={user.nickname} message={user.message} hex={user.hex} type={user.type}/>)}
         </div>
       </div>
     )
@@ -33,26 +33,28 @@ export default class ChatWindow extends Component {
       var joined = this.state.updates.concat({
         nickname: data.nickname,
         message: data.message,
-        hex: data.hex})
+        hex: data.hex,
+        type:"chat"})
       this.setState({updates: joined})
     })
 
     this.props.socket.on('userJoined', data => {
-      let joined = this.state.updates.concat({
-        nickname: data.nickname,
-        message: ' just joined a chat!',
-        hex: data.hex
-      })
+      let joined = this.state.updates.concat([{
+        message: `${data.nickname} joined the chat`,
+        hex: data.hex,
+        type: 'userJoined'
+      }])
 
       this.setState({updates: joined})
     })
 
     this.props.socket.on('userStartTyping', data => {
-      let joined = this.state.usersTyping.concat({
+      let joined = this.state.usersTyping.concat([{
         nickname: data.nickname,
-        message: data.message,
-        hex: data.hex
-      })
+        message: `${data.nickname} is typing ...`,
+        hex: data.hex,
+        type: "userTyping"
+      }])
 
       this.setState({usersTyping: joined})
     })
