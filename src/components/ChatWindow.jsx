@@ -59,7 +59,6 @@ export default class ChatWindow extends Component {
 
     this.props.socket.on('userStopTyping', data => {
       let modified = this.state.usersTyping.filter( (user) => user.nickname !== data.nickname)
-      console.log(modified)
 
       this.setState({usersTyping: modified})
     })
