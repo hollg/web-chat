@@ -18,7 +18,6 @@ export default class ChatWindow extends Component {
         this.messageList = div
       }
         }>
-        <h1>Good and nice webchat</h1>
         <div className='output'>
           {this.state.updates.map((update, i) =>
             <Update key={i} nickname={update.nickname} message={update.message} hex={update.hex} />)}
