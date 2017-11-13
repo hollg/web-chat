@@ -15,12 +15,20 @@ export default class SignUp extends Component {
     return (
       <div className="panda-chat">
         <h1>Choose a nickname</h1>
-        <input className="nickname" type='text' placeholder='nickname' onChange={this.updateNickname} />
+        <input className="nickname" type='text' placeholder='nickname' onChange={this.updateNickname} onKeyDown={this.onKeyDown.bind(this)}/>
         <button onClick={this.emitNickname}>
             Submit
         </button>
       </div>
     )
+  }
+
+  onKeyDown (event) {
+    switch (event.keyCode) {
+      case 13:
+        this.emitNickname()
+        break
+    }
   }
 
   updateNickname (event) {
