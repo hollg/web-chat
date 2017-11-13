@@ -17,7 +17,7 @@ export default class Controls extends Component {
   render () {
     return (
       <div className='controls'>
-        <input className='message' type='text' placeholder='message' value={this.state.message} onChange={this.updateMessage} onKeyUp={this.onKeyPress} />
+        <textarea className='message' type='text' placeholder='message' value={this.state.message} onChange={this.updateMessage} onKeyUp={this.onKeyPress} />
         <button className='send' onClick={this.emitMessage}>Send</button>
       </div>
     )
