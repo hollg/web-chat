@@ -13,9 +13,9 @@ export default class SignUp extends Component {
   }
   render () {
     return (
-      <div className="panda-chat">
+      <div className='panda-chat'>
         <h1>Choose a nickname</h1>
-        <input className="nickname" type='text' placeholder='nickname' onChange={this.updateNickname} onKeyDown={this.onKeyDown.bind(this)}/>
+        <input className='nickname' type='text' placeholder='nickname' onChange={this.updateNickname} onKeyDown={this.onKeyDown.bind(this)} />
         <button onClick={this.emitNickname}>
             Submit
         </button>

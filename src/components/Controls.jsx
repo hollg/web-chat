@@ -22,7 +22,7 @@ export default class Controls extends Component {
     )
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     if (this.state.isTyping[0] && !this.state.isTyping[1]) {
       this.props.socket.emit('startTyping', {
         message: ' is typing...',
@@ -37,7 +37,7 @@ export default class Controls extends Component {
     }
   }
 
-  onKeyPress(event) {
+  onKeyPress (event) {
     console.log('key pressed')
     switch (event.keyCode) {
       case 13:
@@ -51,7 +51,7 @@ export default class Controls extends Component {
       })
     }
 
-    if (this.state.message.length == 0) {
+    if (this.state.message.length === 0) {
       this.setState({
         isTyping: [false, false]
       })

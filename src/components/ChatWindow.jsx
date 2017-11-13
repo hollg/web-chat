@@ -14,15 +14,16 @@ export default class ChatWindow extends Component {
 
   render () {
     return (
-      <div className='chat-window'  ref={(div) => 
-          this.messageList = div
+      <div className='chat-window' ref={(div) => {
+        this.messageList = div
+      }
         }>
-        <h1>Awfully slow sockets chat</h1>
+        <h1>Good and nice webchat</h1>
         <div className='output'>
           {this.state.updates.map((update, i) =>
             <Update key={i} nickname={update.nickname} message={update.message} hex={update.hex} />)}
-          {this.state.usersTyping.map((user, i) => 
-            <Update key={i} nickname={user.nickname} message={user.message} hex={user.hex}/> )}
+          {this.state.usersTyping.map((user, i) =>
+            <Update key={i} nickname={user.nickname} message={user.message} hex={user.hex} />)}
         </div>
       </div>
     )
@@ -43,11 +44,11 @@ export default class ChatWindow extends Component {
         message: ' just joined a chat!',
         hex: data.hex
       })
-        
-      this.setState({updates: joined })
+
+      this.setState({updates: joined})
     })
 
-    this.props.socket.on('userStartTyping', data=> {
+    this.props.socket.on('userStartTyping', data => {
       let joined = this.state.usersTyping.concat({
         nickname: data.nickname,
         message: data.message,
@@ -58,7 +59,7 @@ export default class ChatWindow extends Component {
     })
 
     this.props.socket.on('userStopTyping', data => {
-      let modified = this.state.usersTyping.filter( (user) => user.nickname !== data.nickname)
+      let modified = this.state.usersTyping.filter((user) => user.nickname !== data.nickname)
 
       this.setState({usersTyping: modified})
     })
@@ -68,8 +69,7 @@ export default class ChatWindow extends Component {
     this.scrollToBottom()
   }
 
-  
-  scrollToBottom() {
+  scrollToBottom () {
     const scrollHeight = this.messageList.scrollHeight
     const height = this.messageList.clientHeight
     const maxScrollTop = scrollHeight - height
