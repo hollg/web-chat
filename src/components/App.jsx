@@ -11,8 +11,8 @@ export default class App extends Component {
       nickname: '',
       hex: ''
     }
-    // this.socket = openSocket('https://garys-chat-api.herokuapp.com/')
-    this.socket = openSocket('http://localhost:4040')
+    this.socket = openSocket('https://garys-chat-api.herokuapp.com/')
+    // this.socket = openSocket('http://localhost:4040')
   }
 
   render () {
