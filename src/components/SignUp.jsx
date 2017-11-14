@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
+import ValidationError from './ValidationError.jsx'
 
 export default class SignUp extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      nickname: ''
+      nickname: '',
+      validationError: ''
     }
 
     this.emitNickname = this.emitNickname.bind(this)
@@ -16,6 +18,7 @@ export default class SignUp extends Component {
     return (
       <div className='panda-chat'>
         <h1>Choose a nickname</h1>
+        {this.state.validationError && <ValidationError errorMessage={this.state.validationError}/> }
         <input className='nickname' type='text' placeholder='nickname' onChange={this.updateNickname} onKeyDown={this.onKeyDown} />
         <button onClick={this.emitNickname}>
             Submit
@@ -24,6 +27,11 @@ export default class SignUp extends Component {
     )
   }
 
+  componentDidMount () {
+    this.props.socket.on('validationError', (data) => {
+      this.setState({validationError: data.errorMessage})
+    })
+  }
   onKeyDown (event) {
     switch (event.keyCode) {
       case 13:

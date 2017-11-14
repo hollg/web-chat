@@ -27,6 +27,11 @@ body {
         text-align: center;
     }
 
+    .validation-error{
+        margin-bottom: 0;
+        color: #cc0000;
+        font-weight: 600;
+    }
     .chat-window {
         height: 400px;
         overflow: auto;
